@@ -1,0 +1,43 @@
+name: Shinoo
+
+on:
+  pull_request:
+    branches: [ "main" ]
+  push:
+    branches:
+      - main
+
+jobs:
+  list-prs:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Find PRs merged after specific PR
+      id: list-prs
+      run: |
+        # Find the PR with the specific title
+        SPECIFIC_PR_TITLE="Merge release branch into main"  # replace with your specific PR title
+        SPECIFIC_PR=$(gh pr list --state merged --search "$SPECIFIC_PR_TITLE in:title" --json number,title,mergeCommitSha)
+        
+        if [ -z "$SPECIFIC_PR" ]; then
+          echo "No PR found with title $SPECIFIC_PR_TITLE"
+          exit 1
+        fi
+        
+        SPECIFIC_PR_MERGE_COMMIT_SHA=$(echo $SPECIFIC_PR | jq -r '.[0].mergeCommitSha')
+
+        # List PRs merged after the specific PR
+        PRS=$(gh pr list --state merged --search "merged:>$SPECIFIC_PR_MERGE_COMMIT_SHA" --json number,title,url)
+        echo "::set-output name=prs::$PRS"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
