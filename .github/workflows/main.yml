@@ -24,7 +24,7 @@ jobs:
         SPECIFIC_PR_MERGE_COMMIT_SHA=$(gh pr list --state merged --search "Merge release branch into main in:title" --json mergedAt | jq -r '.[0].mergedAt')
         MERGE_COMMIT_ISO_DATE="${SPECIFIC_PR_MERGE_COMMIT_SHA}Z"
         # List PRs merged after the specific PR
-        PRS=$(gh pr list --state merged --search created:>$MERGE_COMMIT_ISO_DATE" --json number,title,url)
+        PRS=$(gh pr list --state merged --search "created:>$MERGE_COMMIT_ISO_DATE" --json number,title,url)
         echo "::set-output name=prs::$PRS"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -53,25 +53,20 @@ jobs:
        gh auth login --with-token || echo 0
        gh pr create -H new-branch -B main --title 'Merge release branch into main' --body 'Created by Github action'
 
-    - name: Create Jira Ticket
+    - name: Update Jira Ticket
       env:
-        JIRA_USERNAME: ${{ secrets.JIRA_USERNAME }}
         JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+        JIRA_USERNAME: ${{ secrets.JIRA_USERNAME }}          
         JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
       run: |
-        curl -X POST \
-        --url "$JIRA_BASE_URL/rest/api/3/issue" \
-        --user "$JIRA_USERNAME:$JIRA_API_TOKEN" \
-        --header "Content-Type: application/json" \
-        --data '{
-          "fields": {
-            "project": {
-              "key": "PROJECT_KEY"
-            },
-            "summary": "Automatically created ticket from GitHub Actions",
-            "description": "This ticket was created by GitHub Actions workflow.",
-            "issuetype": {
-              "name": "Release"
-            }
-          }
-        }'
+          ISSUE_KEY="PLAT-1287" # Replace with your Jira issue key
+          curl -u $JIRA_USERNAME:$JIRA_API_TOKEN \
+            -X PUT \
+            --data '{
+              "fields": {
+                "summary": "Updated summary from GitHub Actions",
+                "description": "Updated description from GitHub Actions"
+              }
+            }' \
+            -H "Content-Type: application/json" \
+            "$JIRA_BASE_URL/rest/api/2/issue/$ISSUE_KEY"
