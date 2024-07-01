@@ -20,16 +20,8 @@ jobs:
 
     - name: Find PRs merged after specific PR
       id: list-prs
-      run: |
-        # Find the PR with the specific title
-        SPECIFIC_PR=$(gh pr list --state merged --search "Merge release branch into main in:title" --json mergeCommit)
-        
-        if [ -z "$SPECIFIC_PR" ]; then
-          echo "No PR found with title $SPECIFIC_PR_TITLE" > newfile.txt
-          exit 1
-        fi
-        
-        SPECIFIC_PR_MERGE_COMMIT_SHA=$(cat $SPECIFIC_PR | jq -r '.[0].mergeCommit.oid')
+      run: |  
+        SPECIFIC_PR_MERGE_COMMIT_SHA=$(gh pr list --state merged --search "Merge release branch into main in:title" --json mergeCommit | jq -r '.[0].mergeCommit.oid')
 
         # List PRs merged after the specific PR
         PRS=$(gh pr list --state merged --search "merged:>$SPECIFIC_PR_MERGE_COMMIT_SHA" --json number,title,url)
