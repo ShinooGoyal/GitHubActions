@@ -25,7 +25,6 @@ jobs:
         MERGE_COMMIT_ISO_DATE="${SPECIFIC_PR_MERGE_COMMIT_SHA}Z"
         # List PRs merged after the specific PR
         PRS=$(gh pr list --state merged --search "created:>$MERGE_COMMIT_ISO_DATE" --json number,title,url)
-        echo "::set-output name=prs::$PRS"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
@@ -37,7 +36,7 @@ jobs:
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
         git checkout -b new-branch
-        echo "::set-output name=prs::$PRS $SPECIFIC_PR_MERGE_COMMIT_SHA $SPECIFIC_PR_MERGE_COMMIT_SHA" > newfile.txt
+        echo "$PRS $SPECIFIC_PR_MERGE_COMMIT_SHA $SPECIFIC_PR_MERGE_COMMIT_SHA" > newfile.txt
         git add newfile.txt
         git commit -m "Add newfile.txt"
         git push --set-upstream origin new-branch
