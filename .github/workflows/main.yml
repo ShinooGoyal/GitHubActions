@@ -41,3 +41,11 @@ jobs:
         echo "::set-output name=prs::$PRS"  >> "$GITHUB_OUTPUT"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+
+    - name: Update Jira ticket
+      run: node updateJira.js "${{ steps.list-prs.outputs.prs }}"
+      env:
+        JIRA_HOST: ${{ secrets.JIRA_HOST }}
+        JIRA_EMAIL: ${{ secrets.JIRA_EMAIL }}
+        JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
