@@ -38,6 +38,6 @@ jobs:
 
         # List PRs merged after the specific PR
         PRS=$(gh pr list --state merged --search "merged:>$SPECIFIC_PR_MERGE_COMMIT_SHA" --json number,title,url)
-        echo "::set-output name=prs::$PRS"
+        echo "::set-output name=prs::$PRS"  >> "$GITHUB_OUTPUT"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
