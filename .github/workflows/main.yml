@@ -22,7 +22,7 @@ jobs:
       id: list-prs
       run: |  
         SPECIFIC_PR_MERGE_COMMIT_SHA=$(gh pr list --state merged --search "Merge release branch into main in:title" --json mergedAt | jq -r '.[0].mergedAt')
-        MERGE_COMMIT_ISO_DATE="${SPECIFIC_PR_MERGE_COMMIT_SHA}Z
+        MERGE_COMMIT_ISO_DATE="${SPECIFIC_PR_MERGE_COMMIT_SHA}Z"
         # List PRs merged after the specific PR
         PRS=$(gh pr list --state merged --search created:>$MERGE_COMMIT_ISO_DATE" --json number,title,url)
         echo "::set-output name=prs::$PRS"
