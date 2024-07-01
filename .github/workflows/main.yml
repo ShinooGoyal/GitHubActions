@@ -52,3 +52,26 @@ jobs:
       run: |
        gh auth login --with-token || echo 0
        gh pr create -H new-branch -B main --title 'Merge release branch into main' --body 'Created by Github action'
+
+    - name: Create Jira Ticket
+      env:
+        JIRA_USERNAME: ${{ secrets.JIRA_USERNAME }}
+        JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+        JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
+      run: |
+        curl -X POST \
+        --url "$JIRA_BASE_URL/rest/api/3/issue" \
+        --user "$JIRA_USERNAME:$JIRA_API_TOKEN" \
+        --header "Content-Type: application/json" \
+        --data '{
+          "fields": {
+            "project": {
+              "key": "PROJECT_KEY"
+            },
+            "summary": "Automatically created ticket from GitHub Actions",
+            "description": "This ticket was created by GitHub Actions workflow.",
+            "issuetype": {
+              "name": "Release"
+            }
+          }
+        }'
