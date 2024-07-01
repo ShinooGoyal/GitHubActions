@@ -29,10 +29,6 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
-  create-file-and-pr:
-    runs-on: ubuntu-latest
-
-    steps:
     - name: Checkout repository
       uses: actions/checkout@v2
 
