@@ -31,7 +31,7 @@ jobs:
             --data '{
               "fields": {
                 "summary": "Updated summary from GitHub Actions",
-                "description": "$PRS"
+                "description": $PRS
               }
             }' \
             -H "Content-Type: application/json" \
