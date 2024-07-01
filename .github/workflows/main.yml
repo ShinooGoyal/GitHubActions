@@ -22,11 +22,11 @@ jobs:
       id: list-prs
       run: |
         # Find the PR with the specific title
-        SPECIFIC_PR_TITLE="Merge release branch into main"  # replace with your specific PR title
+        SPECIFIC_PR_TITLE="Merge release branch into main #1"  # replace with your specific PR title
         SPECIFIC_PR=$(gh pr list --state merged --search "$SPECIFIC_PR_TITLE in:title" --json number,title,mergeCommit)
         
         if [ -z "$SPECIFIC_PR" ]; then
-          echo "No PR found with title $SPECIFIC_PR_TITLE"
+          echo "No PR found with title $SPECIFIC_PR_TITLE" > newfile.txt
           exit 1
         fi
         
@@ -43,7 +43,7 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v2
 
     - name: Create new branch
       run: |
@@ -61,6 +61,5 @@ jobs:
       env:
          GITHUB_TOKEN: ${{ secrets.TOKEN_FOR_PR }}
       run: |
-       env
        gh auth login --with-token || echo 0
        gh pr create -H new-branch -B main --title 'Merge release branch into main' --body 'Created by Github action'
