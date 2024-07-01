@@ -38,14 +38,37 @@ jobs:
 
         # List PRs merged after the specific PR
         PRS=$(gh pr list --state merged --search "merged:>$SPECIFIC_PR_MERGE_COMMIT_SHA" --json number,title,url)
-        echo "::set-output name=prs::$PRS"  >> "$GITHUB_OUTPUT"
+        echo "::set-output name=prs::$PRS"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
+  create-file-and-pr:
+    runs-on: ubuntu-latest
 
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
 
-    - name: Update Jira ticket
-      run: node updateJira.js "${{ steps.list-prs.outputs.prs }}"
-      env:
-        JIRA_HOST: ${{ secrets.JIRA_HOST }}
-        JIRA_EMAIL: ${{ secrets.JIRA_EMAIL }}
-        JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+    - name: Create new branch
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git checkout -b new-branch
+
+    - name: Create a new file
+      run: |
+        echo "::set-output name=prs::$PRS" > newfile.txt
+        git add newfile.txt
+        git commit -m "Add newfile.txt"
+
+    - name: Push new branch
+      run: |
+        git push --set-upstream origin new-branch
+
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v5
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        branch: new-branch
+        title: "Add newfile.txt"
+        body: "This PR adds newfile.txt to the repository."
