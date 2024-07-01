@@ -25,30 +25,21 @@ jobs:
         MERGE_COMMIT_ISO_DATE="${SPECIFIC_PR_MERGE_COMMIT_SHA}Z"
         # List PRs merged after the specific PR
         PRS=$(gh pr list --state merged --search "created:>$MERGE_COMMIT_ISO_DATE" --json number,title,url)
-        git config --global user.name "github-actions[bot]"
-        git config --global user.email "github-actions[bot]@users.noreply.github.com"
-        git checkout -b new-branch
-        echo "$PRS $SPECIFIC_PR_MERGE_COMMIT_SHA $SPECIFIC_PR_MERGE_COMMIT_SHA" > newfile.txt
-        git add newfile.txt
-        git commit -m "Add newfile.txt"
-        git push --set-upstream origin new-branch
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: Update Jira Ticket
-      env:
-        JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
-        JIRA_USERNAME: ${{ secrets.JIRA_USERNAME }}          
-        JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
-      run: |
-          ISSUE_KEY="PLAT-1287" # Replace with your Jira issue key
+        ISSUE_KEY="PLAT-1338" # Replace with your Jira issue key
           curl -u $JIRA_USERNAME:$JIRA_API_TOKEN \
             -X PUT \
             --data '{
               "fields": {
                 "summary": "Updated summary from GitHub Actions",
-                "description": "Updated description from GitHub Actions"
+                "description": "$PRS"
               }
             }' \
             -H "Content-Type: application/json" \
             "$JIRA_BASE_URL/rest/api/2/issue/$ISSUE_KEY"
+
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+        JIRA_USERNAME: ${{ secrets.JIRA_USERNAME }}          
+        JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
+          
