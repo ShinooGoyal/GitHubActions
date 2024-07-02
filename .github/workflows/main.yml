@@ -34,12 +34,7 @@ jobs:
         ISSUE_KEY="PLAT-1338" # Replace with your Jira issue key
           curl -u $JIRA_USERNAME:$JIRA_API_TOKEN \
             -X PUT \
-            --data '{
-              "fields": {
-                "summary": "Updated summary from GitHub Actions",
-                "description": "$TABLE_CONTENT_ESCAPED"
-              }
-            }' \
+            --data "{\"fields\": {\"summary\": \"Updated summary from GitHub Actions\", \"description\": \"$TABLE_CONTENT_ESCAPED\"}}" \
             -H "Content-Type: application/json" \
             "$JIRA_BASE_URL/rest/api/2/issue/$ISSUE_KEY"
 
