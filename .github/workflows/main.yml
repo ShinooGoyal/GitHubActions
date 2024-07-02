@@ -25,13 +25,20 @@ jobs:
         MERGE_COMMIT_ISO_DATE="${SPECIFIC_PR_MERGE_COMMIT_SHA}Z"
         # List PRs merged after the specific PR
         PRS=$(gh pr list --state merged --search "created:>$MERGE_COMMIT_ISO_DATE" --json number,title,url)
+        echo "## Table of Data" > table.md
+        echo "| Column 1 | Column 2 |" >> table.md
+        echo "|----------|----------|" >> table.md
+        for FILE in $PRS; do
+          echo "| $FILE | $(wc -l < $FILE) lines |" >> table.md
+        done
+        TABLE_CONTENT=$(cat table.md)
         ISSUE_KEY="PLAT-1338" # Replace with your Jira issue key
           curl -u $JIRA_USERNAME:$JIRA_API_TOKEN \
             -X PUT \
             --data '{
               "fields": {
                 "summary": "Updated summary from GitHub Actions",
-                "description": $PRS
+                "description": "$TABLE_CONTENT ${TABLE_CONTENT} $(TABLE_CONTENT)"
               }
             }' \
             -H "Content-Type: application/json" \
