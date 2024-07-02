@@ -27,7 +27,7 @@ jobs:
         PRS=$(gh pr list --state merged --search "created:>$MERGE_COMMIT_ISO_DATE" --json title)
         echo "| Ticket                       | Tester   | Status 🥑 🌶 " >> table.md
         echo "|------------------------------|----------| ------------" >> table.md
-        echo "<html>Hello</html>" >> table.md
+        echo "$PRS" >> table.md
         for FILE in $PRS; do
           echo "| $FILE |" >> table.md
         done
