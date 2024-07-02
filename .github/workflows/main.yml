@@ -28,9 +28,6 @@ jobs:
         echo "| Ticket                       | Tester   | Status 🥑 🌶 " >> table.md
         echo "|------------------------------|----------| ------------" >> table.md
         echo "$PRS" >> table.md
-        for FILE in $PRS; do
-          echo "| $FILE |" >> table.md
-        done
         TABLE_CONTENT=$(cat table.md)
         TABLE_CONTENT_ESCAPED=$(echo "$TABLE_CONTENT" | sed ':a;N;$!ba;s/\n/\\n/g')
         ISSUE_KEY="PLAT-1338" # Replace with your Jira issue key
