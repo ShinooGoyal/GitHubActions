@@ -26,11 +26,9 @@ jobs:
         # List PRs merged after the specific PR
         PRS=$(gh pr list --state merged --search "created:>$MERGE_COMMIT_ISO_DATE" --json number,title,url)
         echo "## Table of Data" > table.md
-        echo "| Column 1 | Column 2 |" >> table.md
-        echo "|----------|----------|" >> table.md
-        for FILE in $PRS; do
-          echo "| $FILE | $(wc -l < $FILE) lines |" >> table.md
-        done
+        echo "| Ticket                       | Tester   | Status 🥑 🌶 " >> table.md
+        echo "|------------------------------|----------| ------------" >> table.md
+        echo $PRS > table.md
         TABLE_CONTENT=$(cat table.md)
         ISSUE_KEY="PLAT-1338" # Replace with your Jira issue key
           curl -u $JIRA_USERNAME:$JIRA_API_TOKEN \
