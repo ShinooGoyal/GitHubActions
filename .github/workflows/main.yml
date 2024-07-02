@@ -24,10 +24,10 @@ jobs:
         SPECIFIC_PR_MERGE_COMMIT_SHA=$(gh pr list --state merged --search "Merge release branch into main in:title" --json mergedAt | jq -r '.[0].mergedAt')
         MERGE_COMMIT_ISO_DATE="${SPECIFIC_PR_MERGE_COMMIT_SHA}Z"
         # List PRs merged after the specific PR
-        PRS=$(gh pr list --state merged --search "created:>$MERGE_COMMIT_ISO_DATE" --json number,title,url)
-        echo "## Table of Data" > table.md
+        PRS=$(gh pr list --state merged --search "created:>$MERGE_COMMIT_ISO_DATE" --json title)
         echo "| Ticket                       | Tester   | Status 🥑 🌶 " >> table.md
         echo "|------------------------------|----------| ------------" >> table.md
+        echo "<html>Hello</html>" >> table.md
         TABLE_CONTENT=$(cat table.md)
         TABLE_CONTENT_ESCAPED=$(echo "$TABLE_CONTENT" | sed ':a;N;$!ba;s/\n/\\n/g')
         ISSUE_KEY="PLAT-1338" # Replace with your Jira issue key
