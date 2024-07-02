@@ -37,7 +37,7 @@ jobs:
             --data '{
               "fields": {
                 "summary": "Updated summary from GitHub Actions",
-                "description": $TABLE_CONTENT_ESCAPED
+                "description": "$TABLE_CONTENT_ESCAPED"
               }
             }' \
             -H "Content-Type: application/json" \
