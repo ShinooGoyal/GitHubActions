@@ -27,7 +27,10 @@ jobs:
         PRS=$(gh pr list --state merged --search "created:>$MERGE_COMMIT_ISO_DATE" --json title)
         echo "| Ticket                       | Tester   | Status 🥑 🌶 " >> table.md
         echo "|------------------------------|----------| ------------" >> table.md
-        echo "$PRS" >> table.md
+        for FILE in $PRS; do
+          TITLE=$(echo $FILE | jq -r '.[0].title')
+          echo $TITLE >> table.md
+        done
         TABLE_CONTENT=$(cat table.md)
         TABLE_CONTENT_ESCAPED=$(echo "$TABLE_CONTENT" | sed ':a;N;$!ba;s/\n/\\n/g')
         ISSUE_KEY="PLAT-1338" # Replace with your Jira issue key
