@@ -1,8 +1,18 @@
 name: Shinoo
 
 on:
-   workflow_dispatch
-
+   workflow_dispatch:
+      inputs:
+         board:
+           description: 'Choose an option'
+           required: true
+           type: choice
+           options:
+             - APP
+             - SN
+             - VLC
+             - PLAT
+             - GRF
 jobs:
   list-prs:
     runs-on: ubuntu-latest
