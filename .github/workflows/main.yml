@@ -42,6 +42,8 @@ jobs:
         done
         TABLE_CONTENT=$(cat table.md)
         TABLE_CONTENT_ESCAPED=$(echo "$TABLE_CONTENT" | sed ':a;N;$!ba;s/\n/\\n/g')
+      env:
+         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Create Jira issue
       uses: atlassian/gajira-create@v2.0.0
