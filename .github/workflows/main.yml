@@ -19,6 +19,9 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
+      
+    - name: Create jira
+      uses: atlassian/gajira-create@v2.0.0
 
     - name: Set up Node.js
       uses: actions/setup-node@v2
