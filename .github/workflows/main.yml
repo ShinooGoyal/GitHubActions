@@ -20,9 +20,6 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
       
-    - name: Create jira
-      uses: atlassian/gajira-create@v2.0.0
-
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
@@ -45,19 +42,29 @@ jobs:
         done
         TABLE_CONTENT=$(cat table.md)
         TABLE_CONTENT_ESCAPED=$(echo "$TABLE_CONTENT" | sed ':a;N;$!ba;s/\n/\\n/g')
-      env:
-         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: Create Jira issue
-      uses: atlassian/gajira-create@v2.0.0
-      with:
+        curl -X POST \
+            -H "Content-Type: application/json" \
+            -u $JIRA_USERNAME:$JIRA_API_TOKEN \
+            --data '{
+              "fields": {
+                "project": {
+                  "key": "'$JIRA_PROJECT_KEY'"
+                },
+                "summary": "Test issue from GitHub Action",
+                "description": "Creating an issue via GitHub Actions",
+                "issuetype": {
+                  "name": "Task"
+                }
+              }
+            }' \
+            $JIRA_URL/rest/api/2/issue
           project: ${{inputs.board}}
           description: $TABLE_CONTENT_ESCAPED
           issuetype: 'Task'
       env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
           JIRA_USER: ${{ secrets.JIRA_EMAIL }}
           JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
           JIRA_USERNAME: ${{ secrets.JIRA_USERNAME }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
