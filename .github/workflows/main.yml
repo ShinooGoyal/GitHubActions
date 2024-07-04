@@ -51,7 +51,7 @@ jobs:
               "summary":"New issue from GitHub Actions",
               "description":"Creating an issue via GitHub Actions.",
               "issuetype":{
-                "name":"task"
+                "name":"Task"
               }
             }
           }' $JIRA_BASE_URL/rest/api/2/issue/
