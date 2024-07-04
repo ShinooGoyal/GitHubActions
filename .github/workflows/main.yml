@@ -46,10 +46,10 @@ jobs:
           --data '{
              "fields":{
                "project":{
-                "key":"PLAT"
+                "key":"'"${{inputs.board}}"'"
               },
               "summary":"New issue from GitHub Actions",
-              "description":"Creating an issue via GitHub Actions.",
+              "description":"'"$TABLE_CONTENT_ESCAPED"'",
               "issuetype":{
                 "name":"Task"
               }
