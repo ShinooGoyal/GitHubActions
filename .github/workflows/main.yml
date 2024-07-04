@@ -48,7 +48,7 @@ jobs:
             --data '{
               "fields": {
                 "project": {
-                  "id": "'$JIRA_PROJECT_KEY'"
+                  "id": "PLAT"
                 },
                 "summary": "Test issue from GitHub Action",
                 "description": "Creating an issue via GitHub Actions",
