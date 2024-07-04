@@ -54,7 +54,7 @@ jobs:
                 "name":"TASK"
               }
             }
-          }' $JIRA_URL/rest/api/2/issue/
+          }' $JIRA_BASE_URL/rest/api/2/issue/
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
