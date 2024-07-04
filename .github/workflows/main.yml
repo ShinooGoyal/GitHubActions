@@ -42,25 +42,19 @@ jobs:
         done
         TABLE_CONTENT=$(cat table.md)
         TABLE_CONTENT_ESCAPED=$(echo "$TABLE_CONTENT" | sed ':a;N;$!ba;s/\n/\\n/g')
-        curl -X POST \
-            -H "Content-Type: application/json" \
-            -u $JIRA_USERNAME:$JIRA_API_TOKEN \
-            --data '{
-              "fields": {
-                "project": {
-                  "id": "PLAT"
-                },
-                "summary": "Test issue from GitHub Action",
-                "description": "Creating an issue via GitHub Actions",
-                "issuetype": {
-                  "name": "Task"
-                }
+curl -X POST -u $JIRA_USERNAME:$JIRA_API_TOKEN -H "Content-Type: application/json" \
+          --data '{
+             "fields":{
+               "project":{
+                "key":"PLAT"
+              },
+              "summary":"New issue from GitHub Actions",
+              "description":"Creating an issue via GitHub Actions.",
+              "issuetype":{
+                "name":"TASK"
               }
-            }' \
-            $JIRA_BASE_URL/rest/api/2/issue
-          project: 'PLAT'
-          description: $TABLE_CONTENT_ESCAPED
-          issuetype: 'Task'
+            }
+          }' $JIRA_URL/rest/api/2/issue/
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
