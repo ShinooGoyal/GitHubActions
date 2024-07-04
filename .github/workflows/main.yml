@@ -58,7 +58,7 @@ jobs:
               }
             }' \
             $JIRA_BASE_URL/rest/api/2/issue
-          project: ${{inputs.board}}
+          project: 'PLAT'
           description: $TABLE_CONTENT_ESCAPED
           issuetype: 'Task'
       env:
