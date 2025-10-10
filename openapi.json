@@ -1,0 +1,6826 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/mobileapi/v1/health/status": {
+      "get": {
+        "operationId": "HealthController_getStatus",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/mobileapi/v1/auth/legacy-login": {
+      "post": {
+        "operationId": "AuthController_legacyLogin",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "description": "Login credentials",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CoreAuthLoginRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CoreAuthLoginSuccessResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": ""
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "User Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mobileapi/v1/auth/session": {
+      "post": {
+        "operationId": "AuthController_createSession",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "description": "Create session",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SessionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successfully created a user session",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SessionSuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "User Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid ID token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Bad Gateway",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mobileapi/v1/auth": {
+      "post": {
+        "operationId": "AuthController_authUser",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/mobileapi/v1/auth/logout": {
+      "get": {
+        "operationId": "AuthController_logout",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/mobileapi/v1/auth/user": {
+      "get": {
+        "operationId": "AuthController_getUser",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/mobileapi/v1/profile/recommendations": {
+      "get": {
+        "operationId": "ProfileController_getProfileRecommendations",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfileRecommendations"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "User Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Profile"
+        ],
+        "security": [
+          {
+            "cookie": []
+          }
+        ]
+      }
+    },
+    "/mobileapi/v1/profile/{userId}": {
+      "get": {
+        "operationId": "ProfileController_getUserProfile",
+        "parameters": [
+          {
+            "name": "userId",
+            "required": true,
+            "in": "path",
+            "description": "User ID",
+            "allowEmptyValue": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SupportWorkerProfile"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "User Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Profile"
+        ],
+        "security": [
+          {
+            "cookie": []
+          }
+        ]
+      }
+    },
+    "/mobileapi/v1/jobDetail/{jobId}": {
+      "get": {
+        "operationId": "JobController_getJobDetail",
+        "parameters": [
+          {
+            "name": "tagId",
+            "required": false,
+            "in": "query",
+            "description": "Viewed via category Tag Identifier",
+            "allowEmptyValue": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "jobId",
+            "required": true,
+            "in": "path",
+            "description": "Job ID",
+            "allowEmptyValue": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobDetail"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Job not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Jobs"
+        ],
+        "security": [
+          {
+            "cookie": []
+          }
+        ]
+      }
+    },
+    "/mobileapi/v1/jobList": {
+      "get": {
+        "operationId": "JobController_getJobs",
+        "parameters": [
+          {
+            "required": false,
+            "name": "userId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "required": false,
+            "name": "sort",
+            "in": "query",
+            "schema": {
+              "enum": [
+                "POSTED_DATE",
+                "JOB_DATE",
+                "RECOMMENDED"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "required": false,
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "required": false,
+            "name": "lat",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "required": false,
+            "name": "long",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "required": false,
+            "name": "radius",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "required": false,
+            "name": "from",
+            "in": "query",
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "required": false,
+            "name": "to",
+            "in": "query",
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "required": false,
+            "name": "dateType",
+            "in": "query",
+            "schema": {
+              "enum": [
+                "POSTED_DATE",
+                "JOB_DATE"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "required": false,
+            "name": "managerId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "required": false,
+            "name": "clientId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "required": false,
+            "name": "status",
+            "in": "query",
+            "schema": {
+              "enum": [
+                "OPEN",
+                "CLOSED",
+                "DELETED",
+                "EXPIRED"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "required": false,
+            "name": "excludeExpired",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "required": false,
+            "name": "days",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "required": false,
+            "name": "starting",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "required": false,
+            "name": "frequency",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "required": false,
+            "name": "duration",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "required": false,
+            "name": "supportActivities",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/JobListItem"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Jobs"
+        ],
+        "security": [
+          {
+            "cookie": []
+          }
+        ]
+      }
+    },
+    "/mobileapi/v1/job/{jobId}/close": {
+      "patch": {
+        "operationId": "JobController_closeJob",
+        "parameters": [
+          {
+            "name": "closeReason",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "SUCCESS",
+                "SUCCESS_OTHER",
+                "FAILURE",
+                "ERROR",
+                "UNKNOWN",
+                "USER_WAS_DEACTIVATED"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "jobId",
+            "required": true,
+            "in": "path",
+            "description": "Job ID",
+            "allowEmptyValue": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Jobs"
+        ],
+        "security": [
+          {
+            "cookie": []
+          }
+        ]
+      }
+    },
+    "/mobileapi/v1/jobFilterList": {
+      "get": {
+        "operationId": "JobFilterController_getJobFilterList",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobFilterList"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "JobFilters"
+        ],
+        "security": [
+          {
+            "cookie": []
+          }
+        ]
+      }
+    },
+    "/mobileapi/v1/homeList": {
+      "get": {
+        "operationId": "HomeController_getHomeList",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HomeList"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "User Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Bad Gateway",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Home"
+        ],
+        "security": [
+          {
+            "cookie": []
+          }
+        ]
+      }
+    },
+    "/mobileapi/v1/inductionProgress": {
+      "get": {
+        "operationId": "OnboardingController_getInductionProgress",
+        "parameters": [
+          {
+            "name": "screen",
+            "required": true,
+            "in": "query",
+            "description": "This query parameter is indicative of the screen where the API is being invoked.",
+            "allowEmptyValue": false,
+            "schema": {
+              "enum": [
+                "pending_screen",
+                "home_screen",
+                "booking_block_screen"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InductionProgressResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "User Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Onboarding"
+        ],
+        "security": [
+          {
+            "cookie": []
+          }
+        ]
+      }
+    },
+    "/mobileapi/v1/inductionProgress/checkBookingBlock": {
+      "get": {
+        "operationId": "OnboardingController_checkInductionProgressBookingBlock",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InductionProgressCheckBookingBlockResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "User Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Onboarding"
+        ],
+        "security": [
+          {
+            "cookie": []
+          }
+        ]
+      }
+    },
+    "/mobileapi/v1/progression": {
+      "get": {
+        "operationId": "ProgressionController_getProgression",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProgressionDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "User Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Bad Gateway",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Progression"
+        ],
+        "security": [
+          {
+            "cookie": []
+          }
+        ]
+      },
+      "put": {
+        "operationId": "ProgressionController_putProgression",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PutProgressionBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProgressionDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "User Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Bad Gateway",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Progression"
+        ],
+        "security": [
+          {
+            "cookie": []
+          }
+        ]
+      }
+    },
+    "/mobileapi/v1/progression/levels": {
+      "get": {
+        "operationId": "ProgressionController_getProgressionLevels",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProgressionDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "User Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Bad Gateway",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Progression"
+        ],
+        "security": [
+          {
+            "cookie": []
+          }
+        ]
+      }
+    },
+    "/mobileapi/v1/profileSearchList": {
+      "post": {
+        "operationId": "ProfileSearchController_getProfileSearchList",
+        "parameters": [
+          {
+            "name": "retainSearch",
+            "required": false,
+            "in": "query",
+            "description": "marks the selected filters and search query to be retained by the last search API",
+            "allowEmptyValue": false,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "search filters",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProfileSearchFilterParams"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfileSearchResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Search"
+        ],
+        "security": [
+          {
+            "cookie": []
+          }
+        ]
+      }
+    },
+    "/mobileapi/v1/profileSearchList/last": {
+      "get": {
+        "operationId": "ProfileSearchController_getLastProfileSearchList",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfileSearchResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Search"
+        ],
+        "security": [
+          {
+            "cookie": []
+          }
+        ]
+      }
+    },
+    "/mobileapi/v1/booking-requests/team": {
+      "get": {
+        "operationId": "BookingRequestController_getTeam",
+        "parameters": [
+          {
+            "name": "bookingEndAtLessThan",
+            "required": false,
+            "in": "query",
+            "description": "Filter bookings ending before this date (format: YYYY-MM-DDTHH:mm)",
+            "schema": {
+              "example": "2024-01-15T17:00",
+              "type": "string"
+            }
+          },
+          {
+            "name": "bookingStartAtGreaterThan",
+            "required": false,
+            "in": "query",
+            "description": "Filter bookings starting after this date (format: YYYY-MM-DDTHH:mm)",
+            "schema": {
+              "example": "2024-01-01T09:00",
+              "type": "string"
+            }
+          },
+          {
+            "name": "bookingTimeZoneId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "example": "Australia/Sydney",
+              "type": "string"
+            }
+          },
+          {
+            "name": "otherUserIds",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "example": [
+                "user123",
+                "user456"
+              ],
+              "type": "array",
+              "items": {}
+            }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "example": 0,
+              "type": "number"
+            }
+          },
+          {
+            "name": "pageSize",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "example": 40,
+              "type": "number"
+            }
+          },
+          {
+            "name": "searchQuery",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "example": "John Smith",
+              "type": "string"
+            }
+          },
+          {
+            "name": "sortBy",
+            "required": false,
+            "in": "query",
+            "description": "Sort order for team members (default: BOOKING_COUNT)",
+            "schema": {
+              "enum": [
+                "DISPLAY_NAME",
+                "BOOKING_COUNT"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TeamResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "User Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "User Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "BookingRequest"
+        ],
+        "security": [
+          {
+            "cookie": []
+          }
+        ]
+      }
+    },
+    "/mobileapi/v1/booking-requests/{bookingRequestId}": {
+      "get": {
+        "operationId": "BookingRequestController_getBookingRequestDetails",
+        "parameters": [
+          {
+            "name": "bookingRequestId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BookingRequestDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "User Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "User Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Booking request Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "BookingRequest"
+        ],
+        "security": [
+          {
+            "cookie": []
+          }
+        ]
+      },
+      "put": {
+        "operationId": "BookingRequestController_updateBookingRequest",
+        "parameters": [
+          {
+            "name": "bookingRequestId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateBookingRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Booking request updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateBookingRequestResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "User Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "User Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Booking request Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "BookingRequest"
+        ],
+        "security": [
+          {
+            "cookie": []
+          }
+        ]
+      }
+    },
+    "/mobileapi/v1/booking-requests": {
+      "post": {
+        "operationId": "BookingRequestController_createBookingRequest",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBookingRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateBookingRequestResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "User Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "User Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "BookingRequest"
+        ],
+        "security": [
+          {
+            "cookie": []
+          }
+        ]
+      },
+      "get": {
+        "operationId": "BookingRequestController_getBookingRequests",
+        "parameters": [
+          {
+            "name": "includeBookingRequests",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "pageSize",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "page",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BookingRequests"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "User Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "User Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "BookingRequest"
+        ],
+        "security": [
+          {
+            "cookie": []
+          }
+        ]
+      }
+    },
+    "/mobileapi/v1/booking-requests/{bookingRequestId}/decline": {
+      "post": {
+        "operationId": "BookingRequestController_declineBookingRequest",
+        "parameters": [
+          {
+            "name": "bookingRequestId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "201": {
+            "description": ""
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "User Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "User Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Booking request Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "BookingRequest"
+        ],
+        "security": [
+          {
+            "cookie": []
+          }
+        ]
+      }
+    },
+    "/mobileapi/v1/booking-requests/{bookingRequestId}/cancel": {
+      "post": {
+        "operationId": "BookingRequestController_cancelBookingRequest",
+        "parameters": [
+          {
+            "name": "bookingRequestId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CancelBookingRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "201": {
+            "description": ""
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "User Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "User Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Booking request Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "BookingRequest"
+        ],
+        "security": [
+          {
+            "cookie": []
+          }
+        ]
+      }
+    },
+    "/mobileapi/v1/booking-requests/{bookingRequestId}/accept": {
+      "post": {
+        "operationId": "BookingRequestController_acceptBookingRequest",
+        "parameters": [
+          {
+            "name": "bookingRequestId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BookingRequestAcceptResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "User Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "User Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Booking request Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "BookingRequest"
+        ],
+        "security": [
+          {
+            "cookie": []
+          }
+        ]
+      }
+    },
+    "/mobileapi/v1/booking/{id}": {
+      "get": {
+        "operationId": "BookingController_getBooking",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Booking Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseBooking"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "User Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "User Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Booking Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Booking"
+        ],
+        "security": [
+          {
+            "cookie": []
+          }
+        ]
+      }
+    },
+    "/mobileapi/v1/bookings/actionsCount": {
+      "get": {
+        "operationId": "BookingController_getBookingActionsCount",
+        "parameters": [
+          {
+            "name": "includeBookingRequests",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BookingActionsCount"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "User Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "User Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Booking"
+        ],
+        "security": [
+          {
+            "cookie": []
+          }
+        ]
+      }
+    },
+    "/mobileapi/v1/bookings": {
+      "get": {
+        "operationId": "BookingController_getBookings",
+        "parameters": [
+          {
+            "name": "status",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "confirmed",
+                "pending-submission",
+                "pending-approval"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageSize",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "page",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Bookings"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "User Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "User Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Booking"
+        ],
+        "security": [
+          {
+            "cookie": []
+          }
+        ]
+      }
+    },
+    "/mobileapi/v1/finance": {
+      "get": {
+        "operationId": "FinanceController_getFinance",
+        "parameters": [
+          {
+            "name": "status",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "next-invoice",
+                "invoiced",
+                "next-pay",
+                "paid"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageSize",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "page",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FinanceList"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "User Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "User Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Finance Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Finance"
+        ],
+        "security": [
+          {
+            "cookie": []
+          }
+        ]
+      }
+    },
+    "/mobileapi/v1/finance/pay-periods": {
+      "get": {
+        "operationId": "FinanceController_getPayPeriods",
+        "parameters": [
+          {
+            "name": "pageSize",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "page",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PayPeriods"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "User Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "User Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Pay periods Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Finance"
+        ],
+        "security": [
+          {
+            "cookie": []
+          }
+        ]
+      }
+    },
+    "/mobileapi/v1/finance/pay-periods/current-bookings": {
+      "get": {
+        "operationId": "FinanceController_getCurrentPayPeriodBookings",
+        "parameters": [
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "pageSize",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CurrentPayPeriodBookings"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "User Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "User Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Bookings for current pay period Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Finance"
+        ],
+        "security": [
+          {
+            "cookie": []
+          }
+        ]
+      }
+    },
+    "/mobileapi/v1/finance/pay-periods/{payRunId}/bookings": {
+      "get": {
+        "operationId": "FinanceController_getPayPeriodBookings",
+        "parameters": [
+          {
+            "name": "payRunId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "pageSize",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PayPeriodBookings"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "User Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "User Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Bookings for pay period Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Finance"
+        ],
+        "security": [
+          {
+            "cookie": []
+          }
+        ]
+      }
+    },
+    "/mobileapi/v1/finance/pay-periods/{payRunId}/user/{userId}/payslip": {
+      "get": {
+        "operationId": "FinanceController_getPayPeriodUserPayslip",
+        "parameters": [
+          {
+            "name": "payRunId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the payslip as a string URL",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "User Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "User Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Pay slip Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Finance"
+        ],
+        "security": [
+          {
+            "cookie": []
+          }
+        ]
+      }
+    },
+    "/mobileapi/v1/compliance/booking/{bookingId}": {
+      "get": {
+        "operationId": "ComplianceController_getBookingCompliance",
+        "parameters": [
+          {
+            "name": "bookingId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/PssBookingCompliance"
+                    },
+                    {
+                      "$ref": "#/components/schemas/WorkerBookingCompliance"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "User Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Compliance"
+        ],
+        "security": [
+          {
+            "cookie": []
+          }
+        ]
+      }
+    },
+    "/mobileapi/v1/qualifications/user/{userId}": {
+      "put": {
+        "operationId": "QualificationsController_updateUserQualifications",
+        "parameters": [
+          {
+            "name": "userId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateQualificationsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateQualficationsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "User Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Qualifications"
+        ],
+        "security": [
+          {
+            "cookie": []
+          }
+        ]
+      }
+    },
+    "/mobileapi/v1/qualifications/data": {
+      "get": {
+        "operationId": "QualificationsController_getQualifications",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetQualificationsResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Qualifications"
+        ],
+        "security": [
+          {
+            "cookie": []
+          }
+        ]
+      }
+    },
+    "/mobileapi/v1/qualifications": {
+      "post": {
+        "operationId": "QualificationsController_createQualification",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProposedQualification"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreatedQualification"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "User Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Qualifications"
+        ],
+        "security": [
+          {
+            "cookie": []
+          }
+        ]
+      }
+    },
+    "/mobileapi/v1/swagger/json": {
+      "get": {
+        "operationId": "SwaggerController_getStatus",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/mobileapi/v1/swagger/html": {
+      "get": {
+        "operationId": "SwaggerController_getSwaggerUI",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/mobileapi/v1/user": {
+      "get": {
+        "operationId": "UserController_getUser",
+        "parameters": [
+          {
+            "name": "refreshFlags",
+            "required": false,
+            "in": "query",
+            "description": "Whether to refresh feature flags",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User authentication data retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "user": {
+                      "type": "object",
+                      "properties": {
+                        "auth": {
+                          "type": "object"
+                        },
+                        "acnt": {
+                          "type": "object"
+                        },
+                        "features": {
+                          "type": "array"
+                        },
+                        "agreements": {
+                          "type": "object"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "User Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Bad Gateway",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseSchema"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "User"
+        ],
+        "security": [
+          {
+            "cookie": []
+          }
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Restricted Swagger",
+    "description": "API documentation",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [
+    {
+      "name": "swagger",
+      "description": ""
+    }
+  ],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "CoreAuthLoginRequest": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "urlContainsSensitiveData": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "email",
+          "password"
+        ]
+      },
+      "CoreAuthLoginSuccessResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "user": {
+            "type": "object",
+            "properties": {
+              "auth": {
+                "required": true,
+                "type": "object"
+              },
+              "acnt": {
+                "required": true,
+                "type": "object"
+              },
+              "features": {
+                "required": true,
+                "type": "array",
+                "items": {
+                  "type": "object"
+                }
+              },
+              "agreements": {
+                "required": true,
+                "type": "object"
+              }
+            }
+          }
+        },
+        "required": [
+          "success",
+          "user"
+        ]
+      },
+      "ErrorResponseSchema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "errorDescription": {
+            "type": "string"
+          },
+          "stack": {
+            "type": "string"
+          },
+          "domain": {
+            "type": "string"
+          },
+          "statusCode": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "code",
+          "message",
+          "errorDescription",
+          "domain",
+          "statusCode"
+        ]
+      },
+      "SessionRequest": {
+        "type": "object",
+        "properties": {
+          "idToken": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "idToken"
+        ]
+      },
+      "SessionSuccessResponse": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "type": "object",
+            "properties": {
+              "auth": {
+                "required": true,
+                "type": "object"
+              },
+              "acnt": {
+                "required": true,
+                "type": "object"
+              },
+              "features": {
+                "required": true,
+                "type": "array",
+                "items": {
+                  "type": "object"
+                }
+              },
+              "agreements": {
+                "required": true,
+                "type": "object"
+              }
+            }
+          }
+        },
+        "required": [
+          "user"
+        ]
+      },
+      "ProfileRecommendation": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "displayName": {
+            "type": "string"
+          },
+          "suburb": {
+            "type": "string"
+          },
+          "avatarUrl": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "displayName",
+          "suburb",
+          "avatarUrl"
+        ]
+      },
+      "ProfileRecommendations": {
+        "type": "object",
+        "properties": {
+          "profileRecommendations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProfileRecommendation"
+            }
+          }
+        },
+        "required": [
+          "profileRecommendations"
+        ]
+      },
+      "BookingRestrictionItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "displayText": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "displayText"
+        ]
+      },
+      "BookingRestrictions": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "buttonVoiceoverText": {
+            "type": "string"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BookingRestrictionItem"
+            }
+          }
+        },
+        "required": [
+          "title",
+          "items"
+        ]
+      },
+      "CompletedLearningModuleDetails": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "completedAt": {
+            "type": "string"
+          },
+          "source": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "title",
+          "completedAt",
+          "source"
+        ]
+      },
+      "CompletedLearningModules": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "type": "object",
+            "properties": {
+              "title": {
+                "required": true,
+                "type": "string"
+              },
+              "code": {
+                "required": true,
+                "type": "string"
+              }
+            }
+          },
+          "modules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CompletedLearningModuleDetails"
+            }
+          }
+        },
+        "required": [
+          "category",
+          "modules"
+        ]
+      },
+      "LearningDetails": {
+        "type": "object",
+        "properties": {
+          "completedModules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CompletedLearningModules"
+            }
+          }
+        },
+        "required": [
+          "completedModules"
+        ]
+      },
+      "SupportWorkerProfile": {
+        "type": "object",
+        "properties": {
+          "ageDescription": {
+            "type": "string"
+          },
+          "bookingRestrictions": {
+            "$ref": "#/components/schemas/BookingRestrictions"
+          },
+          "learning": {
+            "$ref": "#/components/schemas/LearningDetails"
+          },
+          "completedQualifications": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "currentlyPursuingQualifications": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "relevantLearningText": {
+            "type": "string"
+          },
+          "availableToConnect": {
+            "type": "boolean"
+          },
+          "bio": {
+            "type": "string"
+          },
+          "displayName": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "languages": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "lastActive": {
+            "type": "string"
+          },
+          "lastActiveDescription": {
+            "type": "string"
+          },
+          "locationLatitude": {
+            "type": "number"
+          },
+          "locationLongitude": {
+            "type": "number"
+          },
+          "pictureUrl": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "suburb": {
+            "type": "string"
+          },
+          "supportAreas": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "age": {
+            "type": "number"
+          },
+          "ageRangeMaximum": {
+            "type": "number"
+          },
+          "ageRangeMinimum": {
+            "type": "number"
+          },
+          "approvedAt": {
+            "type": "string"
+          },
+          "availabilityFrequency": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "availabilityTimeBands": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "availabilityLastUpdated": {
+            "type": "string"
+          },
+          "availabilityDescription": {
+            "type": "string"
+          },
+          "availableToTransport": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "completedLearningModules": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "covidVaccinationStatus": {
+            "type": "object"
+          },
+          "distance": {
+            "type": "number"
+          },
+          "gender": {
+            "type": "object"
+          },
+          "genderPreference": {
+            "type": "object"
+          },
+          "hasAcknowledgedSafetyStandards": {
+            "type": "boolean"
+          },
+          "hasOwnTransport": {
+            "type": "boolean"
+          },
+          "hasRelevantLearning": {
+            "type": "boolean"
+          },
+          "okWithPets": {
+            "type": "boolean"
+          },
+          "positiveRecommendationCount": {
+            "type": "number"
+          },
+          "respondsToMessagesWithin": {
+            "type": "number"
+          },
+          "specialisedSupport": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "status": {
+            "type": "object"
+          },
+          "supportedAgeRanges": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "totalApprovedBookings": {
+            "type": "number"
+          },
+          "totalClientsFromApprovedBookings": {
+            "type": "number"
+          },
+          "type": {
+            "type": "number",
+            "enum": []
+          },
+          "verifiedDocuments": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "wageProgression": {
+            "type": "boolean"
+          },
+          "willingToTravel": {
+            "type": "object"
+          },
+          "workHistory": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        },
+        "required": [
+          "availableToConnect",
+          "displayName",
+          "id",
+          "languages",
+          "lastActive",
+          "lastActiveDescription",
+          "pictureUrl",
+          "state",
+          "suburb",
+          "supportAreas",
+          "age",
+          "ageRangeMinimum",
+          "approvedAt",
+          "availabilityFrequency",
+          "availabilityTimeBands",
+          "availabilityLastUpdated",
+          "availableToTransport",
+          "completedLearningModules",
+          "covidVaccinationStatus",
+          "gender",
+          "genderPreference",
+          "hasAcknowledgedSafetyStandards",
+          "hasOwnTransport",
+          "hasRelevantLearning",
+          "positiveRecommendationCount",
+          "specialisedSupport",
+          "status",
+          "supportedAgeRanges",
+          "totalApprovedBookings",
+          "totalClientsFromApprovedBookings",
+          "type",
+          "verifiedDocuments",
+          "willingToTravel",
+          "workHistory"
+        ]
+      },
+      "ProfileSummary": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "displayName": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "type": "number"
+          },
+          "profilePicUrl": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "displayName",
+          "type",
+          "profilePicUrl"
+        ]
+      },
+      "Location": {
+        "type": "object",
+        "properties": {
+          "lat": {
+            "type": "number"
+          },
+          "long": {
+            "type": "number"
+          },
+          "suburb": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "lat",
+          "long",
+          "suburb"
+        ]
+      },
+      "TrustMarker": {
+        "type": "object",
+        "properties": {
+          "displayText": {
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "RECOMMENDATIONS",
+              "RECENTLY_JOINED",
+              "QUALIFICATION"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "displayText",
+          "type"
+        ]
+      },
+      "InterestedUserMessage": {
+        "type": "object",
+        "properties": {
+          "subject": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "text"
+        ]
+      },
+      "InterestedUser": {
+        "type": "object",
+        "properties": {
+          "profileSummary": {
+            "$ref": "#/components/schemas/ProfileSummary"
+          },
+          "trustMarker": {
+            "$ref": "#/components/schemas/TrustMarker"
+          },
+          "trustMarkers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TrustMarker"
+            }
+          },
+          "message": {
+            "$ref": "#/components/schemas/InterestedUserMessage"
+          },
+          "isDeclinedByClient": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "profileSummary"
+        ]
+      },
+      "DateDisplayItem": {
+        "type": "object",
+        "properties": {
+          "displayText": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "displayText"
+        ]
+      },
+      "SupportActivity": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "object"
+          },
+          "title": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "type",
+          "title"
+        ]
+      },
+      "PayPotential": {
+        "type": "object",
+        "properties": {
+          "displayText": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "displayText",
+          "amount"
+        ]
+      },
+      "Drive": {
+        "type": "object",
+        "properties": {
+          "displayText": {
+            "type": "string"
+          },
+          "minimumDuration": {
+            "type": "number"
+          },
+          "maximumDuration": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "displayText"
+        ]
+      },
+      "IdealWorkerDescriptor": {
+        "type": "object",
+        "properties": {
+          "iconUrl": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "iconUrl",
+          "description"
+        ]
+      },
+      "IdealWorker": {
+        "type": "object",
+        "properties": {
+          "descriptors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IdealWorkerDescriptor"
+            }
+          }
+        },
+        "required": [
+          "descriptors"
+        ]
+      },
+      "LearnOnJob": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "title",
+          "description"
+        ]
+      },
+      "RemunerationAllowance": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string"
+          },
+          "linkDescription": {
+            "type": "string"
+          },
+          "linkUrl": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "description"
+        ]
+      },
+      "JobDetail": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "OPEN",
+              "CLOSED",
+              "DELETED",
+              "EXPIRED"
+            ],
+            "type": "string"
+          },
+          "createdDate": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "clientProfile": {
+            "$ref": "#/components/schemas/ProfileSummary"
+          },
+          "location": {
+            "$ref": "#/components/schemas/Location"
+          },
+          "isPrivate": {
+            "type": "boolean"
+          },
+          "ongoing": {
+            "type": "boolean"
+          },
+          "interestedUsers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InterestedUser"
+            }
+          },
+          "viewCount": {
+            "type": "number"
+          },
+          "viewedByMe": {
+            "type": "boolean"
+          },
+          "applicationMessage": {
+            "type": "string"
+          },
+          "isDeclinedByClient": {
+            "type": "boolean"
+          },
+          "distance": {
+            "type": "number"
+          },
+          "duration": {
+            "enum": [
+              "SHORT",
+              "MEDIUM",
+              "LONG"
+            ],
+            "type": "string"
+          },
+          "day": {
+            "enum": [
+              "WEEKDAY",
+              "WEEKEND"
+            ],
+            "type": "string"
+          },
+          "time": {
+            "enum": [
+              "DAY",
+              "NIGHT",
+              "OVERNIGHT"
+            ],
+            "type": "string"
+          },
+          "interestedCount": {
+            "type": "number"
+          },
+          "interestedByMe": {
+            "type": "boolean"
+          },
+          "fromDate": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "toDate": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "dateDisplayItem": {
+            "$ref": "#/components/schemas/DateDisplayItem"
+          },
+          "timeZoneId": {
+            "type": "string"
+          },
+          "expiryDate": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "supportActivities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SupportActivity"
+            }
+          },
+          "isUrgent": {
+            "type": "boolean"
+          },
+          "payPotential": {
+            "$ref": "#/components/schemas/PayPotential"
+          },
+          "drive": {
+            "$ref": "#/components/schemas/Drive"
+          },
+          "idealWorker": {
+            "$ref": "#/components/schemas/IdealWorker"
+          },
+          "learnOnJob": {
+            "$ref": "#/components/schemas/LearnOnJob"
+          },
+          "isPostedByHireup": {
+            "type": "boolean"
+          },
+          "remunerationAllowanceDetails": {
+            "$ref": "#/components/schemas/RemunerationAllowance"
+          },
+          "inManagedApplicantsExperiment": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "status",
+          "createdDate",
+          "title",
+          "description",
+          "location",
+          "isPrivate",
+          "ongoing",
+          "interestedUsers",
+          "viewCount",
+          "viewedByMe",
+          "interestedCount",
+          "interestedByMe",
+          "dateDisplayItem",
+          "expiryDate",
+          "supportActivities",
+          "isUrgent",
+          "idealWorker",
+          "isPostedByHireup",
+          "inManagedApplicantsExperiment"
+        ]
+      },
+      "JobListItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "OPEN",
+              "CLOSED",
+              "DELETED",
+              "EXPIRED"
+            ],
+            "type": "string"
+          },
+          "createdDate": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "clientProfile": {
+            "$ref": "#/components/schemas/ProfileSummary"
+          },
+          "location": {
+            "$ref": "#/components/schemas/Location"
+          },
+          "isPrivate": {
+            "type": "boolean"
+          },
+          "ongoing": {
+            "type": "boolean"
+          },
+          "viewCount": {
+            "type": "number"
+          },
+          "viewedByMe": {
+            "type": "boolean"
+          },
+          "applicationMessage": {
+            "type": "string"
+          },
+          "isDeclinedByClient": {
+            "type": "boolean"
+          },
+          "distance": {
+            "type": "number"
+          },
+          "duration": {
+            "enum": [
+              "SHORT",
+              "MEDIUM",
+              "LONG"
+            ],
+            "type": "string"
+          },
+          "day": {
+            "enum": [
+              "WEEKDAY",
+              "WEEKEND"
+            ],
+            "type": "string"
+          },
+          "time": {
+            "enum": [
+              "DAY",
+              "NIGHT",
+              "OVERNIGHT"
+            ],
+            "type": "string"
+          },
+          "interestedCount": {
+            "type": "number"
+          },
+          "interestedByMe": {
+            "type": "boolean"
+          },
+          "fromDate": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "toDate": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "dateDisplayItem": {
+            "$ref": "#/components/schemas/DateDisplayItem"
+          },
+          "timeZoneId": {
+            "type": "string"
+          },
+          "expiryDate": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "supportActivities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SupportActivity"
+            }
+          },
+          "isUrgent": {
+            "type": "boolean"
+          },
+          "payPotential": {
+            "$ref": "#/components/schemas/PayPotential"
+          },
+          "drive": {
+            "$ref": "#/components/schemas/Drive"
+          },
+          "remunerationAllowanceDetails": {
+            "$ref": "#/components/schemas/RemunerationAllowance"
+          },
+          "inManagedApplicantsExperiment": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "status",
+          "createdDate",
+          "title",
+          "description",
+          "location",
+          "isPrivate",
+          "ongoing",
+          "viewCount",
+          "viewedByMe",
+          "interestedCount",
+          "interestedByMe",
+          "dateDisplayItem",
+          "expiryDate",
+          "supportActivities",
+          "isUrgent",
+          "inManagedApplicantsExperiment"
+        ]
+      },
+      "JobFilterDaysOfTheWeek": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "MONDAY",
+              "TUESDAY",
+              "WEDNESDAY",
+              "THURSDAY",
+              "FRIDAY",
+              "SATURDAY",
+              "SUNDAY"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "title",
+          "type"
+        ]
+      },
+      "JobFilterDuration": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "LESS_THAN_TWO",
+              "TWO_TO_FOUR",
+              "FOUR_TO_SIX",
+              "SIX_TO_EIGHT",
+              "EIGHT_OR_MORE"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "title",
+          "type"
+        ]
+      },
+      "JobFilterFrequency": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "ONE_OFF",
+              "REPEATING"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "title",
+          "type"
+        ]
+      },
+      "JobFilterStartTime": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "EARLY_MORNING",
+              "LATE_MORNING",
+              "AFTERNOON",
+              "EVENING",
+              "OVERNIGHT"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "title",
+          "type"
+        ]
+      },
+      "JobFilterSupportActivity": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "enum": [
+              "COMMUNITY_ACCESS",
+              "DAILY_LIVING_SKILLS",
+              "EMPLOYMENT_SUPPORT",
+              "EXERCISE",
+              "HELP_AROUND_THE_HOUSE",
+              "LEARNING_SUPPORT",
+              "MANUAL_HANDLING",
+              "MEAL_PREP",
+              "MEALTIME_MANAGEMENT",
+              "PERSONAL_CARE",
+              "SOCIAL_SUPPORT",
+              "SPECIALISED_OR_COMPLEX_SUPPORT",
+              "THERAPY_SUPPORT",
+              "TRANSPORT"
+            ],
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "iconUrl": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "type",
+          "title",
+          "iconUrl"
+        ]
+      },
+      "JobFilterList": {
+        "type": "object",
+        "properties": {
+          "daysOfTheWeek": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/JobFilterDaysOfTheWeek"
+            }
+          },
+          "durations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/JobFilterDuration"
+            }
+          },
+          "frequencies": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/JobFilterFrequency"
+            }
+          },
+          "startTimes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/JobFilterStartTime"
+            }
+          },
+          "supportActivities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/JobFilterSupportActivity"
+            }
+          }
+        },
+        "required": [
+          "daysOfTheWeek",
+          "durations",
+          "frequencies",
+          "startTimes",
+          "supportActivities"
+        ]
+      },
+      "HomeCard": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "subtitle": {
+            "type": "string"
+          },
+          "actionText": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "title",
+          "subtitle",
+          "actionText"
+        ]
+      },
+      "JobSummaryCategoryItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "subtitle": {
+            "type": "string"
+          },
+          "avatarUrl": {
+            "type": "string"
+          },
+          "dateDisplayText": {
+            "type": "string"
+          },
+          "driveDisplayText": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "subtitle",
+          "avatarUrl",
+          "dateDisplayText",
+          "driveDisplayText"
+        ]
+      },
+      "JobCategory": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "subtitle": {
+            "type": "string"
+          },
+          "iconUrl": {
+            "type": "string"
+          },
+          "tagId": {
+            "type": "string"
+          },
+          "jobSummaries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/JobSummaryCategoryItem"
+            }
+          }
+        },
+        "required": [
+          "title",
+          "subtitle",
+          "iconUrl",
+          "tagId",
+          "jobSummaries"
+        ]
+      },
+      "OnboardingLoadingDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "enum": [
+              "SPECIALISED_SUPPORT",
+              "SPECIALISED_SUPPORT_2"
+            ],
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "linkTo": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "type",
+          "description",
+          "linkTo"
+        ]
+      },
+      "InductionStep": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "iconUrl": {
+            "type": "string"
+          },
+          "linkUrl": {
+            "type": "string"
+          },
+          "analyticsIdentifier": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "title",
+          "iconUrl",
+          "linkUrl",
+          "analyticsIdentifier"
+        ]
+      },
+      "InductionRequirement": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "enum": [
+              "beforeYouBook",
+              "finishAccountSetup",
+              "findSupportFaster"
+            ],
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "iconUrl": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "steps": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InductionStep"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "required",
+          "steps"
+        ]
+      },
+      "Progression": {
+        "type": "object",
+        "properties": {
+          "buttonTitle": {
+            "type": "string"
+          },
+          "iconId": {
+            "type": "string"
+          },
+          "motivationHeader": {
+            "type": "string"
+          },
+          "motivationText": {
+            "type": "string"
+          },
+          "progressBarPercentage": {
+            "type": "number"
+          },
+          "progressText": {
+            "type": "string"
+          },
+          "tipText": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "iconId",
+          "motivationHeader",
+          "motivationText"
+        ]
+      },
+      "HomeList": {
+        "type": "object",
+        "properties": {
+          "byoInviteCard": {
+            "$ref": "#/components/schemas/HomeCard"
+          },
+          "bookingRequestCard": {
+            "$ref": "#/components/schemas/HomeCard"
+          },
+          "jobCategories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/JobCategory"
+            }
+          },
+          "profileRecommendations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProfileRecommendation"
+            }
+          },
+          "showPostJobModule": {
+            "type": "boolean"
+          },
+          "showQualificationsCardOnTop": {
+            "type": "boolean"
+          },
+          "loading": {
+            "$ref": "#/components/schemas/OnboardingLoadingDetails"
+          },
+          "inductionRequirements": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InductionRequirement"
+            }
+          },
+          "progressionCard": {
+            "$ref": "#/components/schemas/Progression"
+          }
+        },
+        "required": [
+          "byoInviteCard",
+          "jobCategories",
+          "profileRecommendations",
+          "showPostJobModule",
+          "inductionRequirements"
+        ]
+      },
+      "InductionProgressResponse": {
+        "type": "object",
+        "properties": {
+          "showPostJobModule": {
+            "type": "boolean"
+          },
+          "loading": {
+            "$ref": "#/components/schemas/OnboardingLoadingDetails"
+          },
+          "inductionRequirements": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InductionRequirement"
+            }
+          }
+        },
+        "required": [
+          "inductionRequirements"
+        ]
+      },
+      "InductionProgressCheckBookingBlockResponse": {
+        "type": "object",
+        "properties": {
+          "bookingBlockExists": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "bookingBlockExists"
+        ]
+      },
+      "ProgressionDetails": {
+        "type": "object",
+        "properties": {
+          "milestoneId": {
+            "type": "string"
+          },
+          "progressionCard": {
+            "$ref": "#/components/schemas/Progression"
+          },
+          "progressionSteps": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "initiatives": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "recognitionCard": {
+            "type": "object"
+          }
+        }
+      },
+      "PutProgressionBody": {
+        "type": "object",
+        "properties": {
+          "milestoneId": {
+            "type": "string"
+          },
+          "acknowledgedRecognition": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "milestoneId",
+          "acknowledgedRecognition"
+        ]
+      },
+      "ProfileSearchLocation": {
+        "type": "object",
+        "properties": {
+          "latitude": {
+            "type": "number"
+          },
+          "longitude": {
+            "type": "number"
+          },
+          "radius": {
+            "type": "number"
+          },
+          "placeName": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "latitude",
+          "longitude",
+          "radius"
+        ]
+      },
+      "ProfileSearchFilterParams": {
+        "type": "object",
+        "properties": {
+          "sortResultsBy": {
+            "enum": [
+              "relevance",
+              "recency",
+              "proximity",
+              "newest"
+            ],
+            "type": "string"
+          },
+          "page": {
+            "type": "number"
+          },
+          "profileType": {
+            "enum": [
+              "supportWorkerProfile",
+              "pssProfile"
+            ],
+            "type": "string"
+          },
+          "queryPhrase": {
+            "type": "string"
+          },
+          "ageMaximum": {
+            "type": "number"
+          },
+          "ageMinimum": {
+            "type": "number"
+          },
+          "availableToConnect": {
+            "type": "boolean"
+          },
+          "gender": {
+            "enum": [
+              "male",
+              "female",
+              "nonBinary"
+            ],
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "location": {
+            "$ref": "#/components/schemas/ProfileSearchLocation"
+          },
+          "okWithPets": {
+            "type": "boolean"
+          },
+          "supportAreas": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "Help around the house",
+                "In home care",
+                "Personal care and hygiene",
+                "Out and about",
+                "Education, training, and employment",
+                "Therapy support",
+                "Transport",
+                "Specialised support"
+              ]
+            }
+          },
+          "excludeItemsFromList": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "hasOwnTransport": {
+            "type": "boolean"
+          },
+          "covidVaccinationStatus": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "sortResultsBy"
+        ]
+      },
+      "ProfileSearchFilters": {
+        "type": "object",
+        "properties": {
+          "sortResultsBy": {
+            "enum": [
+              "relevance",
+              "recency",
+              "proximity",
+              "newest"
+            ],
+            "type": "string"
+          },
+          "page": {
+            "type": "number"
+          },
+          "profileType": {
+            "enum": [
+              "supportWorkerProfile",
+              "pssProfile"
+            ],
+            "type": "string"
+          },
+          "queryPhrase": {
+            "type": "string"
+          },
+          "ageMaximum": {
+            "type": "number"
+          },
+          "ageMinimum": {
+            "type": "number"
+          },
+          "availableToConnect": {
+            "type": "boolean"
+          },
+          "gender": {
+            "enum": [
+              "male",
+              "female",
+              "nonBinary"
+            ],
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "location": {
+            "$ref": "#/components/schemas/ProfileSearchLocation"
+          },
+          "okWithPets": {
+            "type": "boolean"
+          },
+          "supportAreas": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "Help around the house",
+                "In home care",
+                "Personal care and hygiene",
+                "Out and about",
+                "Education, training, and employment",
+                "Therapy support",
+                "Transport",
+                "Specialised support"
+              ]
+            }
+          },
+          "excludeItemsFromList": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "hasOwnTransport": {
+            "type": "boolean"
+          },
+          "covidVaccinationStatus": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "Fully vaccinated",
+                "Medically exempt",
+                "Not specified",
+                "One dose",
+                "Partially vaccinated",
+                "Three doses",
+                "Two doses"
+              ]
+            }
+          }
+        },
+        "required": [
+          "sortResultsBy"
+        ]
+      },
+      "SearchResultProfile": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "age": {
+            "type": "number"
+          },
+          "bio": {
+            "type": "string"
+          },
+          "displayName": {
+            "type": "string"
+          },
+          "lastActive": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "pictureUrl": {
+            "type": "string"
+          },
+          "suburb": {
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "supportWorkerProfile",
+              "pssProfile"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "age",
+          "displayName",
+          "lastActive",
+          "suburb",
+          "type"
+        ]
+      },
+      "ProfileSearchResultHighlight": {
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string"
+          },
+          "matchedValue": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "field",
+          "matchedValue"
+        ]
+      },
+      "ProfileSearchResult": {
+        "type": "object",
+        "properties": {
+          "distance": {
+            "type": "number"
+          },
+          "shortlisted": {
+            "type": "boolean"
+          },
+          "notSuitable": {
+            "type": "boolean"
+          },
+          "trustMarkers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TrustMarker"
+            }
+          },
+          "profile": {
+            "$ref": "#/components/schemas/SearchResultProfile"
+          },
+          "highlightedMatches": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProfileSearchResultHighlight"
+            }
+          },
+          "remunerationAllowanceDescription": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "distance",
+          "shortlisted",
+          "notSuitable",
+          "profile",
+          "highlightedMatches"
+        ]
+      },
+      "ProfileSearchResponse": {
+        "type": "object",
+        "properties": {
+          "totalPageCount": {
+            "type": "number"
+          },
+          "returnedResultCount": {
+            "type": "number"
+          },
+          "totalResultCount": {
+            "type": "number"
+          },
+          "totalOmittedResultCount": {
+            "type": "number"
+          },
+          "page": {
+            "type": "number"
+          },
+          "filters": {
+            "$ref": "#/components/schemas/ProfileSearchFilters"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProfileSearchResult"
+            }
+          }
+        },
+        "required": [
+          "totalPageCount",
+          "returnedResultCount",
+          "totalResultCount",
+          "totalOmittedResultCount",
+          "page",
+          "filters",
+          "items"
+        ]
+      },
+      "TeamMember": {
+        "type": "object",
+        "properties": {
+          "allowTravel": {
+            "type": "boolean"
+          },
+          "displayName": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "isBooked": {
+            "type": "boolean"
+          },
+          "profilePicUrl": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "suburb": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "allowTravel",
+          "displayName",
+          "id",
+          "profilePicUrl",
+          "state",
+          "suburb"
+        ]
+      },
+      "TeamResponse": {
+        "type": "object",
+        "properties": {
+          "members": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TeamMember"
+            }
+          },
+          "page": {
+            "type": "number"
+          },
+          "pageSize": {
+            "type": "number"
+          },
+          "totalPageCount": {
+            "type": "number"
+          },
+          "totalResultCount": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "members",
+          "page",
+          "pageSize",
+          "totalPageCount",
+          "totalResultCount"
+        ]
+      },
+      "ItemDescription": {
+        "type": "object",
+        "properties": {
+          "displayText": {
+            "type": "string"
+          },
+          "voiceoverText": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "displayText",
+          "voiceoverText"
+        ]
+      },
+      "LineItemSubItem": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "$ref": "#/components/schemas/ItemDescription"
+          }
+        },
+        "required": [
+          "description"
+        ]
+      },
+      "LineItem": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "string"
+          },
+          "description": {
+            "$ref": "#/components/schemas/ItemDescription"
+          },
+          "subItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LineItemSubItem"
+            }
+          }
+        },
+        "required": [
+          "total",
+          "description",
+          "subItems"
+        ]
+      },
+      "BookingRequestFinanceDto": {
+        "type": "object",
+        "properties": {
+          "reference": {
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "INVOICE",
+              "PAYROLL"
+            ],
+            "type": "string"
+          },
+          "lineItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LineItem"
+            }
+          },
+          "total": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "reference",
+          "type",
+          "lineItems",
+          "total"
+        ]
+      },
+      "BookingRequestLocation": {
+        "type": "object",
+        "properties": {
+          "isRemote": {
+            "type": "boolean"
+          },
+          "suburb": {
+            "type": "string"
+          },
+          "displayText": {
+            "type": "string"
+          },
+          "voiceoverText": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "isRemote",
+          "suburb",
+          "displayText",
+          "voiceoverText"
+        ]
+      },
+      "LocationData": {
+        "type": "object",
+        "properties": {
+          "suburb": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "postcode": {
+            "type": "string"
+          },
+          "latitude": {
+            "type": "number"
+          },
+          "longitude": {
+            "type": "number"
+          },
+          "type": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "suburb",
+          "state",
+          "postcode",
+          "latitude",
+          "longitude",
+          "type",
+          "description"
+        ]
+      },
+      "Participants": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "displayName": {
+            "type": "string"
+          },
+          "profilePicUrl": {
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "ACCEPTED",
+              "DECLINED",
+              "PENDING"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "displayName",
+          "profilePicUrl"
+        ]
+      },
+      "PendingComplianceNote": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "title",
+          "description"
+        ]
+      },
+      "PendingComplianceCallToAction": {
+        "type": "object",
+        "properties": {
+          "default": {
+            "type": "object",
+            "properties": {
+              "link": {
+                "required": true,
+                "type": "string"
+              },
+              "text": {
+                "required": true,
+                "type": "string"
+              }
+            }
+          },
+          "iconUrl": {
+            "type": "string"
+          },
+          "phoneNumber": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "browserURL",
+              "phoneNumber",
+              "webviewURL"
+            ],
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "default",
+          "iconUrl",
+          "text",
+          "type"
+        ]
+      },
+      "PendingWorkerRequirement": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "callToAction": {
+            "$ref": "#/components/schemas/PendingComplianceCallToAction"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "description",
+          "callToAction"
+        ]
+      },
+      "PendingComplianceHeader": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "title",
+          "description",
+          "label"
+        ]
+      },
+      "PendingCompliance": {
+        "type": "object",
+        "properties": {
+          "note": {
+            "$ref": "#/components/schemas/PendingComplianceNote"
+          },
+          "pendingWorkerRequirements": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PendingWorkerRequirement"
+            }
+          },
+          "header": {
+            "$ref": "#/components/schemas/PendingComplianceHeader"
+          }
+        },
+        "required": [
+          "note",
+          "pendingWorkerRequirements",
+          "header"
+        ]
+      },
+      "SupportCategory": {
+        "type": "object",
+        "properties": {
+          "displayText": {
+            "type": "string"
+          },
+          "voiceoverText": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "displayText",
+          "voiceoverText"
+        ]
+      },
+      "VehicleAllowance": {
+        "type": "object",
+        "properties": {
+          "displayText": {
+            "type": "string"
+          },
+          "voiceoverText": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "displayText",
+          "voiceoverText"
+        ]
+      },
+      "BookingRequestDetails": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string"
+          },
+          "duration": {
+            "type": "object",
+            "properties": {
+              "displayText": {
+                "required": true,
+                "type": "string"
+              },
+              "voiceoverText": {
+                "required": true,
+                "type": "string"
+              }
+            }
+          },
+          "endAtUtc": {
+            "type": "string"
+          },
+          "finance": {
+            "$ref": "#/components/schemas/BookingRequestFinanceDto"
+          },
+          "financeReference": {
+            "type": "string"
+          },
+          "firstToAccept": {
+            "type": "object",
+            "properties": {
+              "displayText": {
+                "required": true,
+                "type": "string"
+              },
+              "voiceoverText": {
+                "required": true,
+                "type": "string"
+              }
+            }
+          },
+          "frequency": {
+            "type": "object",
+            "properties": {
+              "displayText": {
+                "required": true,
+                "type": "string"
+              },
+              "voiceoverText": {
+                "required": true,
+                "type": "string"
+              }
+            }
+          },
+          "id": {
+            "type": "string"
+          },
+          "location": {
+            "$ref": "#/components/schemas/BookingRequestLocation"
+          },
+          "locationData": {
+            "$ref": "#/components/schemas/LocationData"
+          },
+          "locationType": {
+            "enum": [
+              "COMBINATION",
+              "COMMUNITY",
+              "HOME",
+              "REMOTE"
+            ],
+            "type": "string"
+          },
+          "participants": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Participants"
+            }
+          },
+          "pendingCompliance": {
+            "$ref": "#/components/schemas/PendingCompliance"
+          },
+          "repeatEndAt": {
+            "type": "string"
+          },
+          "repeatEndAtUtc": {
+            "type": "string"
+          },
+          "repeatFrequency": {
+            "enum": [
+              "WEEKLY",
+              "FORTNIGHTLY",
+              "NONE"
+            ],
+            "type": "string"
+          },
+          "sleepover": {
+            "type": "object",
+            "properties": {
+              "displayText": {
+                "required": true,
+                "type": "string"
+              },
+              "voiceoverText": {
+                "required": true,
+                "type": "string"
+              }
+            }
+          },
+          "sleepoverStartAt": {
+            "type": "string"
+          },
+          "sleepoverStartAtUtc": {
+            "type": "string"
+          },
+          "startAtUtc": {
+            "type": "string"
+          },
+          "supportCategory": {
+            "$ref": "#/components/schemas/SupportCategory"
+          },
+          "supportCategoryId": {
+            "type": "number"
+          },
+          "timeZoneId": {
+            "type": "string"
+          },
+          "vehicleAllowance": {
+            "$ref": "#/components/schemas/VehicleAllowance"
+          },
+          "vehicleRequirement": {
+            "enum": [
+              "CLIENT_VEHICLE",
+              "NONE",
+              "WORKER_VEHICLE"
+            ],
+            "type": "string"
+          },
+          "workerHasPendingRequirements": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "description",
+          "duration",
+          "endAtUtc",
+          "finance",
+          "firstToAccept",
+          "frequency",
+          "id",
+          "location",
+          "participants",
+          "repeatFrequency",
+          "sleepover",
+          "startAtUtc",
+          "timeZoneId",
+          "vehicleAllowance",
+          "vehicleRequirement"
+        ]
+      },
+      "CreateBookingRequestDto": {
+        "type": "object",
+        "properties": {
+          "clientId": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "duplicatedFromBookingId": {
+            "type": "string"
+          },
+          "duplicatedFromBookingRequestId": {
+            "type": "string"
+          },
+          "endAt": {
+            "type": "string"
+          },
+          "financeReference": {
+            "type": "string"
+          },
+          "locationType": {
+            "enum": [
+              "COMBINATION",
+              "COMMUNITY",
+              "HOME",
+              "REMOTE"
+            ],
+            "type": "string"
+          },
+          "repeatEndAt": {
+            "type": "string"
+          },
+          "repeatFrequency": {
+            "enum": [
+              "NONE",
+              "WEEKLY",
+              "FORTNIGHTLY"
+            ],
+            "type": "string"
+          },
+          "sleepoverStartAt": {
+            "type": "string"
+          },
+          "startAt": {
+            "type": "string"
+          },
+          "supportCategory": {
+            "type": "number"
+          },
+          "supportWorkerIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "validateSWAvailability": {
+            "type": "boolean"
+          },
+          "vehicleRequirement": {
+            "enum": [
+              "CLIENT_VEHICLE",
+              "NONE",
+              "WORKER_VEHICLE"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "clientId",
+          "description",
+          "endAt",
+          "locationType",
+          "repeatFrequency",
+          "startAt",
+          "supportWorkerIds",
+          "validateSWAvailability",
+          "vehicleRequirement"
+        ]
+      },
+      "CreateBookingRequestResponse": {
+        "type": "object",
+        "properties": {
+          "bookingRequestId": {
+            "type": "string"
+          },
+          "bookingListType": {
+            "enum": [
+              "waitingForSubmission",
+              "requested"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "bookingRequestId",
+          "bookingListType"
+        ]
+      },
+      "CancelReason": {
+        "type": "object",
+        "properties": {
+          "reason": {
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "CANT_EDIT_BOOKING",
+              "NO_LONGER_NEED_BOOKING",
+              "OTHER",
+              "SW_NOT_AVAILABLE"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ]
+      },
+      "CancelBookingRequestDto": {
+        "type": "object",
+        "properties": {
+          "cancelReason": {
+            "$ref": "#/components/schemas/CancelReason"
+          }
+        },
+        "required": [
+          "cancelReason"
+        ]
+      },
+      "UpdateBookingRequestDto": {
+        "type": "object",
+        "properties": {
+          "clientId": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "endAt": {
+            "type": "string"
+          },
+          "financeReference": {
+            "type": "string"
+          },
+          "locationData": {
+            "type": "object",
+            "properties": {
+              "suburb": {
+                "required": true,
+                "type": "string"
+              },
+              "state": {
+                "required": true,
+                "type": "string"
+              },
+              "postcode": {
+                "required": true,
+                "type": "string"
+              },
+              "latitude": {
+                "required": true,
+                "type": "number"
+              },
+              "longitude": {
+                "required": true,
+                "type": "number"
+              },
+              "type": {
+                "required": true,
+                "type": "string"
+              },
+              "description": {
+                "required": true,
+                "type": "string"
+              }
+            }
+          },
+          "locationType": {
+            "enum": [
+              "COMBINATION",
+              "COMMUNITY",
+              "HOME",
+              "REMOTE"
+            ],
+            "type": "string"
+          },
+          "repeatEndAt": {
+            "type": "string"
+          },
+          "repeatFrequency": {
+            "enum": [
+              "NONE",
+              "WEEKLY",
+              "FORTNIGHTLY"
+            ],
+            "type": "string"
+          },
+          "sleepoverStartAt": {
+            "type": "string"
+          },
+          "startAt": {
+            "type": "string"
+          },
+          "supportCategory": {
+            "type": "number"
+          },
+          "supportWorkerIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "timeZoneId": {
+            "type": "string"
+          },
+          "validateSWAvailability": {
+            "type": "boolean"
+          },
+          "vehicleRequirement": {
+            "enum": [
+              "CLIENT_VEHICLE",
+              "NONE",
+              "WORKER_VEHICLE"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "clientId",
+          "description",
+          "endAt",
+          "locationData",
+          "locationType",
+          "repeatFrequency",
+          "startAt",
+          "supportWorkerIds",
+          "timeZoneId",
+          "validateSWAvailability",
+          "vehicleRequirement"
+        ]
+      },
+      "UpdateBookingRequestResponse": {
+        "type": "object",
+        "properties": {}
+      },
+      "BookingRequestAcceptResponse": {
+        "type": "object",
+        "properties": {
+          "bookingId": {
+            "type": "string"
+          },
+          "status": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "bookingId",
+          "status"
+        ]
+      },
+      "DurationCommon": {
+        "type": "object",
+        "properties": {
+          "displayText": {
+            "type": "string"
+          },
+          "voiceoverText": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "displayText",
+          "voiceoverText"
+        ]
+      },
+      "FirstToAccept": {
+        "type": "object",
+        "properties": {
+          "displayText": {
+            "type": "string"
+          },
+          "voiceoverText": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "displayText",
+          "voiceoverText"
+        ]
+      },
+      "FrequencyCommon": {
+        "type": "object",
+        "properties": {
+          "displayText": {
+            "type": "string"
+          },
+          "voiceoverText": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "displayText",
+          "voiceoverText"
+        ]
+      },
+      "Participant": {
+        "type": "object",
+        "properties": {
+          "displayName": {
+            "type": "string"
+          },
+          "profilePicUrl": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "displayName",
+          "profilePicUrl"
+        ]
+      },
+      "Price": {
+        "type": "object",
+        "properties": {
+          "displayText": {
+            "type": "string"
+          },
+          "voiceoverText": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "displayText",
+          "voiceoverText"
+        ]
+      },
+      "BookingCommonSleepover": {
+        "type": "object",
+        "properties": {
+          "displayText": {
+            "type": "string"
+          },
+          "voiceoverText": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "displayText",
+          "voiceoverText"
+        ]
+      },
+      "VehicleAllowanceCommon": {
+        "type": "object",
+        "properties": {
+          "displayText": {
+            "type": "string"
+          },
+          "voiceoverText": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "displayText",
+          "voiceoverText"
+        ]
+      },
+      "BookingRequestSummary": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "duration": {
+            "$ref": "#/components/schemas/DurationCommon"
+          },
+          "endAtUtc": {
+            "type": "string"
+          },
+          "firstToAccept": {
+            "$ref": "#/components/schemas/FirstToAccept"
+          },
+          "frequency": {
+            "$ref": "#/components/schemas/FrequencyCommon"
+          },
+          "isLegacy": {
+            "type": "boolean"
+          },
+          "location": {
+            "$ref": "#/components/schemas/BookingRequestLocation"
+          },
+          "participants": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Participant"
+            }
+          },
+          "price": {
+            "$ref": "#/components/schemas/Price"
+          },
+          "requestDeclineCount": {
+            "type": "number"
+          },
+          "sleepover": {
+            "$ref": "#/components/schemas/BookingCommonSleepover"
+          },
+          "startAtUtc": {
+            "type": "string"
+          },
+          "supportWorkerCount": {
+            "type": "number"
+          },
+          "timeZoneId": {
+            "type": "string"
+          },
+          "userActionDisplayText": {
+            "type": "string"
+          },
+          "vehicleAllowance": {
+            "$ref": "#/components/schemas/VehicleAllowanceCommon"
+          }
+        },
+        "required": [
+          "id",
+          "duration",
+          "endAtUtc",
+          "isLegacy",
+          "location",
+          "participants",
+          "startAtUtc",
+          "timeZoneId",
+          "vehicleAllowance"
+        ]
+      },
+      "BookingRequests": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BookingRequestSummary"
+            }
+          },
+          "page": {
+            "type": "number"
+          },
+          "totalPageCount": {
+            "type": "number"
+          },
+          "totalResultCount": {
+            "type": "number"
+          },
+          "returnResultCount": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "title",
+          "description",
+          "items",
+          "page",
+          "totalPageCount",
+          "totalResultCount",
+          "returnResultCount"
+        ]
+      },
+      "CoreBookingLocation": {
+        "type": "object",
+        "properties": {
+          "latitude": {
+            "type": "number",
+            "nullable": true
+          },
+          "longitude": {
+            "type": "number",
+            "nullable": true
+          },
+          "postcode": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "suburb": {
+            "type": "string"
+          },
+          "type": {
+            "type": "object"
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "latitude",
+          "longitude",
+          "postcode",
+          "state"
+        ]
+      },
+      "BaseBooking": {
+        "type": "object",
+        "properties": {
+          "clientId": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "endAt": {
+            "type": "string"
+          },
+          "endAtUtc": {
+            "type": "string"
+          },
+          "financeReference": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "isGroup": {
+            "type": "boolean"
+          },
+          "location": {
+            "$ref": "#/components/schemas/CoreBookingLocation"
+          },
+          "locationType": {
+            "enum": [
+              "COMBINATION",
+              "COMMUNITY",
+              "HOME",
+              "REMOTE"
+            ],
+            "type": "string"
+          },
+          "repeatEndAt": {
+            "type": "string"
+          },
+          "repeatEndAtUtc": {
+            "type": "string"
+          },
+          "repeatFrequency": {
+            "enum": [
+              "NONE",
+              "WEEKLY",
+              "FORTNIGHTLY"
+            ],
+            "type": "string"
+          },
+          "sleepoverStartAt": {
+            "type": "string"
+          },
+          "sleepoverStartAtUtc": {
+            "type": "string"
+          },
+          "startAt": {
+            "type": "string"
+          },
+          "startAtUtc": {
+            "type": "string"
+          },
+          "status": {
+            "type": "object"
+          },
+          "supportWorkerId": {
+            "type": "string"
+          },
+          "timeZoneId": {
+            "type": "string"
+          },
+          "vehicleRequirement": {
+            "enum": [
+              "CLIENT_VEHICLE",
+              "NONE",
+              "WORKER_VEHICLE"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "clientId",
+          "description",
+          "endAt",
+          "endAtUtc",
+          "id",
+          "isGroup",
+          "location",
+          "locationType",
+          "repeatFrequency",
+          "startAt",
+          "startAtUtc",
+          "status",
+          "supportWorkerId",
+          "timeZoneId",
+          "vehicleRequirement"
+        ]
+      },
+      "BookingActionsCount": {
+        "type": "object",
+        "properties": {
+          "requested": {
+            "type": "number"
+          },
+          "pendingSubmission": {
+            "type": "number"
+          },
+          "pendingApproval": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "requested",
+          "pendingSubmission",
+          "pendingApproval"
+        ]
+      },
+      "BookingLocation": {
+        "type": "object",
+        "properties": {
+          "isRemote": {
+            "type": "boolean"
+          },
+          "suburb": {
+            "type": "string"
+          },
+          "displayText": {
+            "type": "string"
+          },
+          "voiceoverText": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "isRemote",
+          "suburb",
+          "displayText",
+          "voiceoverText"
+        ]
+      },
+      "BookingSummary": {
+        "type": "object",
+        "properties": {
+          "sleepover": {
+            "$ref": "#/components/schemas/BookingCommonSleepover"
+          },
+          "duration": {
+            "$ref": "#/components/schemas/DurationCommon"
+          },
+          "frequency": {
+            "$ref": "#/components/schemas/FrequencyCommon"
+          },
+          "vehicleAllowance": {
+            "$ref": "#/components/schemas/VehicleAllowanceCommon"
+          },
+          "price": {
+            "$ref": "#/components/schemas/Price"
+          },
+          "id": {
+            "type": "string"
+          },
+          "startAtUtc": {
+            "type": "string"
+          },
+          "endAtUtc": {
+            "type": "string"
+          },
+          "timeZoneId": {
+            "type": "string"
+          },
+          "location": {
+            "$ref": "#/components/schemas/BookingLocation"
+          },
+          "participants": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Participant"
+            }
+          },
+          "userActionDisplayText": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "duration",
+          "vehicleAllowance",
+          "id",
+          "startAtUtc",
+          "endAtUtc",
+          "timeZoneId",
+          "location",
+          "participants"
+        ]
+      },
+      "Bookings": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BookingSummary"
+            }
+          },
+          "page": {
+            "type": "number"
+          },
+          "totalPageCount": {
+            "type": "number"
+          },
+          "totalResultCount": {
+            "type": "number"
+          },
+          "returnResultCount": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "title",
+          "description",
+          "items",
+          "page",
+          "totalPageCount",
+          "totalResultCount",
+          "returnResultCount"
+        ]
+      },
+      "FinanceLocation": {
+        "type": "object",
+        "properties": {
+          "isRemote": {
+            "type": "boolean"
+          },
+          "suburb": {
+            "type": "string"
+          },
+          "displayText": {
+            "type": "string"
+          },
+          "voiceoverText": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "isRemote",
+          "suburb",
+          "displayText",
+          "voiceoverText"
+        ]
+      },
+      "FinanceSummary": {
+        "type": "object",
+        "properties": {
+          "sleepover": {
+            "$ref": "#/components/schemas/BookingCommonSleepover"
+          },
+          "duration": {
+            "$ref": "#/components/schemas/DurationCommon"
+          },
+          "frequency": {
+            "$ref": "#/components/schemas/FrequencyCommon"
+          },
+          "vehicleAllowance": {
+            "$ref": "#/components/schemas/VehicleAllowanceCommon"
+          },
+          "price": {
+            "$ref": "#/components/schemas/Price"
+          },
+          "id": {
+            "type": "string"
+          },
+          "startAtUtc": {
+            "type": "string"
+          },
+          "endAtUtc": {
+            "type": "string"
+          },
+          "timeZoneId": {
+            "type": "string"
+          },
+          "location": {
+            "$ref": "#/components/schemas/FinanceLocation"
+          },
+          "participants": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Participant"
+            }
+          }
+        },
+        "required": [
+          "duration",
+          "vehicleAllowance",
+          "id",
+          "startAtUtc",
+          "endAtUtc",
+          "timeZoneId",
+          "location",
+          "participants"
+        ]
+      },
+      "FinanceList": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FinanceSummary"
+            }
+          },
+          "page": {
+            "type": "number"
+          },
+          "totalPageCount": {
+            "type": "number"
+          },
+          "totalResultCount": {
+            "type": "number"
+          },
+          "returnResultCount": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "title",
+          "description",
+          "items",
+          "page",
+          "totalPageCount",
+          "totalResultCount",
+          "returnResultCount"
+        ]
+      },
+      "CurrentPayPeriodDto": {
+        "type": "object",
+        "properties": {
+          "periodEndDate": {
+            "type": "string",
+            "example": "2025-07-03"
+          },
+          "payDate": {
+            "type": "string",
+            "example": "2025-07-10"
+          },
+          "totalHours": {
+            "type": "number",
+            "example": 40
+          },
+          "grossPay": {
+            "type": "string",
+            "example": "$6,315.45"
+          },
+          "netPay": {
+            "type": "string",
+            "example": "$4,315.45"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Paid",
+              "Open",
+              "Processing"
+            ],
+            "example": "Processing"
+          }
+        },
+        "required": [
+          "periodEndDate",
+          "payDate",
+          "totalHours",
+          "grossPay",
+          "netPay",
+          "status"
+        ]
+      },
+      "PayPeriodDetailItem": {
+        "type": "object",
+        "properties": {
+          "payRunId": {
+            "type": "string",
+            "example": "68510c05d33bd400942f627f"
+          },
+          "periodEndDate": {
+            "type": "string",
+            "example": "2025-07-03"
+          },
+          "payDate": {
+            "type": "string",
+            "example": "2025-07-10"
+          },
+          "totalHours": {
+            "type": "number",
+            "example": 38
+          },
+          "grossPay": {
+            "type": "string",
+            "example": "$6,315.45"
+          },
+          "netPay": {
+            "type": "string",
+            "example": "$4,315.45"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Paid",
+              "Open",
+              "Processing"
+            ],
+            "example": "Paid"
+          }
+        },
+        "required": [
+          "payRunId",
+          "periodEndDate",
+          "payDate",
+          "totalHours",
+          "grossPay",
+          "netPay",
+          "status"
+        ]
+      },
+      "PreviousPayPeriodDto": {
+        "type": "object",
+        "properties": {
+          "details": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PayPeriodDetailItem"
+            }
+          },
+          "page": {
+            "type": "number",
+            "example": 1
+          },
+          "totalPageCount": {
+            "type": "number",
+            "example": 5
+          },
+          "returnedResultCount": {
+            "type": "number",
+            "example": 1
+          }
+        },
+        "required": [
+          "details",
+          "page",
+          "totalPageCount",
+          "returnedResultCount"
+        ]
+      },
+      "PayPeriods": {
+        "type": "object",
+        "properties": {
+          "currentPayPeriod": {
+            "$ref": "#/components/schemas/CurrentPayPeriodDto"
+          },
+          "previousPayPeriod": {
+            "$ref": "#/components/schemas/PreviousPayPeriodDto"
+          }
+        },
+        "required": [
+          "currentPayPeriod",
+          "previousPayPeriod"
+        ]
+      },
+      "PayPeriodBookingItem": {
+        "type": "object",
+        "properties": {
+          "bookingId": {
+            "type": "string",
+            "example": "6847d4eda46afb2d35f46b05"
+          },
+          "clientName": {
+            "type": "string",
+            "example": "John Doe"
+          },
+          "from": {
+            "type": "string",
+            "example": "2025-07-01T22:00:00Z"
+          },
+          "to": {
+            "type": "string",
+            "example": "2025-07-02T06:00:00Z"
+          },
+          "isSleepover": {
+            "type": "boolean",
+            "example": true
+          },
+          "amount": {
+            "type": "string",
+            "example": "$800.00"
+          },
+          "timeZoneId": {
+            "type": "string",
+            "example": "Australia/Sydney"
+          }
+        },
+        "required": [
+          "bookingId",
+          "clientName",
+          "from",
+          "to",
+          "isSleepover",
+          "amount",
+          "timeZoneId"
+        ]
+      },
+      "CurrentPayPeriodBookings": {
+        "type": "object",
+        "properties": {
+          "bookings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PayPeriodBookingItem"
+            }
+          },
+          "page": {
+            "type": "number",
+            "example": 0
+          },
+          "totalPageCount": {
+            "type": "number",
+            "example": 3
+          },
+          "returnedResultCount": {
+            "type": "number",
+            "example": 10
+          }
+        },
+        "required": [
+          "bookings",
+          "page",
+          "totalPageCount",
+          "returnedResultCount"
+        ]
+      },
+      "PayPeriodBookings": {
+        "type": "object",
+        "properties": {
+          "bookings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PayPeriodBookingItem"
+            }
+          },
+          "page": {
+            "type": "number",
+            "example": 0
+          },
+          "totalPageCount": {
+            "type": "number",
+            "example": 2
+          },
+          "returnedResultCount": {
+            "type": "number",
+            "example": 20
+          }
+        },
+        "required": [
+          "bookings",
+          "page",
+          "totalPageCount",
+          "returnedResultCount"
+        ]
+      },
+      "PssBookingCompliance": {
+        "type": "object",
+        "properties": {
+          "pendingWorkerRequirementsSummary": {
+            "type": "object",
+            "properties": {
+              "displayText": {
+                "required": true,
+                "type": "string"
+              }
+            }
+          }
+        },
+        "required": [
+          "pendingWorkerRequirementsSummary"
+        ]
+      },
+      "WorkerBookingCompliance": {
+        "type": "object",
+        "properties": {
+          "pendingWorkerRequirements": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PendingWorkerRequirement"
+            }
+          }
+        },
+        "required": [
+          "pendingWorkerRequirements"
+        ]
+      },
+      "UpdateQualificationsRequest": {
+        "type": "object",
+        "properties": {
+          "hasQualifications": {
+            "type": "boolean"
+          },
+          "profileId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "hasQualifications",
+          "profileId"
+        ]
+      },
+      "UpdateQualficationsResponse": {
+        "type": "object",
+        "properties": {
+          "hasQualifications": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "hasQualifications"
+        ]
+      },
+      "GetQualificationsResponse": {
+        "type": "object",
+        "properties": {
+          "qualifications": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        },
+        "required": [
+          "qualifications"
+        ]
+      },
+      "ProposedQualification": {
+        "type": "object",
+        "properties": {
+          "document": {
+            "type": "object"
+          },
+          "achievement": {
+            "type": "object"
+          },
+          "completionDate": {
+            "type": "string"
+          },
+          "course": {
+            "type": "object"
+          },
+          "hasCompletedCourse": {
+            "type": "boolean"
+          },
+          "institution": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "achievement",
+          "completionDate",
+          "course",
+          "hasCompletedCourse",
+          "institution"
+        ]
+      },
+      "CreatedQualification": {
+        "type": "object",
+        "properties": {
+          "documentUrl": {
+            "type": "string"
+          },
+          "achievement": {
+            "type": "object"
+          },
+          "completionDate": {
+            "type": "string"
+          },
+          "course": {
+            "type": "object"
+          },
+          "hasCompletedCourse": {
+            "type": "boolean"
+          },
+          "institution": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "documentUrl",
+          "achievement",
+          "completionDate",
+          "course",
+          "hasCompletedCourse",
+          "institution"
+        ]
+      }
+    }
+  }
+}
